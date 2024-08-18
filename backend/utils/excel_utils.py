@@ -18,21 +18,23 @@ def write_to_excel(data, file_path):
             book = Workbook()
             sheet = book.active
             sheet.title = 'Sheet1'
-            sheet.append(['id', 'name', 'phone_no', 'email_id', 'chakki_center_name', 'address'])  # Include 'id' as a header
 
-        # Determine the next available ID
-        if sheet.max_row > 1:
-            last_id = sheet.cell(row=sheet.max_row, column=1).value
-        else:
-            last_id = 0
+        if not sheet.max_row > 1:
+            headers = ['name', 'phone_no', 'email_id', 'chakki_center_name', 'address']
+            sheet.append(headers)
 
         for entry in data:
-            last_id += 1
-            row = [last_id, entry.get('name', ''), entry.get('phone_no', ''), entry.get('email_id', ''), entry.get('chakki_center_name', ''), entry.get('address', '')]
+            row = [
+                str(entry.get('name', '')),
+                str(entry.get('phone_no', '')),
+                str(entry.get('email_id', '')),
+                str(entry.get('chakki_center_name', '')),
+                str(entry.get('address', ''))
+            ]
             sheet.append(row)
 
         book.save(file_path)
-        print(f"Data successfully written to Excel with next ID {last_id}.")
+        print("Data successfully written to Excel.")
     except Exception as e:
         print(f"Failed to write data to Excel: {e}")
 
