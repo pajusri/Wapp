@@ -19,8 +19,8 @@ def write_to_excel(data, file_path):
             sheet = book.active
             sheet.title = 'Sheet1'
 
-        if sheet.max_row == 1:  # No data yet, add headers
-            headers = ['name', 'phone_no', 'email_id', 'chakki_center_name', 'address']
+        if not sheet.max_row > 1:
+            headers = ['name', 'phone_no', 'email_id', 'designation', 'department']
             sheet.append(headers)
 
         for entry in data:
@@ -28,8 +28,8 @@ def write_to_excel(data, file_path):
                 str(entry.get('name', '')),
                 str(entry.get('phone_no', '')),
                 str(entry.get('email_id', '')),
-                str(entry.get('chakki_center_name', '')),
-                str(entry.get('address', ''))
+                str(entry.get('designation', '')),
+                str(entry.get('department', ''))
             ]
             sheet.append(row)
 
@@ -66,8 +66,8 @@ def read_from_excel(file_path):
                 'name': row[0],
                 'phone_no': row[1],
                 'email_id': row[2],
-                'chakki_center_name': row[3],
-                'address': row[4]
+                'designation': row[3],
+                'department': row[4]
             })
 
         return data
@@ -92,6 +92,7 @@ def delete_from_excel(file_path, row_id):
         book = load_workbook(file_path)
         sheet = book.active
 
+        # Adjust for zero-based index
         if row_id < 2 or row_id > sheet.max_row:
             print(f"Row with ID {row_id} not found in {file_path}.")
             return False
@@ -108,7 +109,7 @@ def update_excel(file_path, row_id, updated_data):
     if not isinstance(file_path, str):
         print(f"Invalid file path in update_excel: {file_path} (type: {type(file_path)})")
         return False
-
+    
     if not isinstance(row_id, int):
         print(f"Invalid row_id in update_excel: {row_id} (type: {type(row_id)})")
         return False
@@ -121,13 +122,14 @@ def update_excel(file_path, row_id, updated_data):
         book = load_workbook(file_path)
         sheet = book.active
 
+        # Adjust for one-based index (Excel row numbering starts from 1)
         if row_id < 2 or row_id > sheet.max_row:
             print(f"Row with ID {row_id} not found in {file_path}.")
             return False
 
         for key, value in updated_data.items():
-            if key in ['name', 'phone_no', 'email_id', 'chakki_center_name', 'address']:
-                col_idx = ['name', 'phone_no', 'email_id', 'chakki_center_name', 'address'].index(key) + 1
+            if key in ['name', 'phone_no', 'email_id', 'department']:
+                col_idx = ['name', 'phone_no', 'email_id', 'department'].index(key) + 1
                 sheet.cell(row=row_id, column=col_idx).value = value
 
         book.save(file_path)

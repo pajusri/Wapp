@@ -4,6 +4,9 @@ import Customer from './Customer';  // Ensure this path is correct
 import Stock from './Stock';        // Ensure this path is correct
 import Employee from './Employee';  // Ensure this path is correct
 import Bill from './Bill';          // Ensure this path is correct
+import ProductionBook from './ProductionBook';  
+import Purchase from './Purchase';
+
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -64,6 +67,8 @@ function Welcome() {
       <h1>Welcome to the application!</h1>
       <ul>
         <li><a href="/customer">Customer-related</a></li>
+        <li><a href="/production-book">production-book</a></li>
+        <li><a href="/purchase">Purchase</a></li>
         <li><a href="/stock">Stock</a></li>
         <li><a href="/employee">Employee</a></li>
         <li><a href="/bill">Bill</a></li>
@@ -79,8 +84,10 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/customer/*" element={<Customer />} />
+        <Route path="/production-book" element={<ProductionBook />} /> 
+        <Route path="/purchase/*" element={<Purchase />} /> {/* Handle routing within Purchase */}
         <Route path="/stock" element={<Stock />} />
-        <Route path="/employee" element={<Employee />} />
+        <Route path="/employee/*" element={<Employee />} />
         <Route path="/bill" element={<Bill />} />
       </Routes>
     </Router>

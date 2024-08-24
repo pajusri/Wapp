@@ -8,10 +8,14 @@ def create_app():
     # Import blueprints inside the function to avoid circular imports
     from routes.auth import auth_bp
     from routes.customer import customer_bp
+    from routes.employee import employee_bp
+    from routes.purchase import purchase_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(customer_bp)
-
+    app.register_blueprint(employee_bp)
+    app.register_blueprint(purchase_bp)
+    
     return app
 
 if __name__ == '__main__':

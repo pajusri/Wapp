@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CustomerDetails() {
     const [customerData, setCustomerData] = useState([]);
     const [editingCustomer, setEditingCustomer] = useState(null);
     const [editedData, setEditedData] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchCustomerDetails();
@@ -76,11 +78,15 @@ function CustomerDetails() {
             console.error('Error updating customer:', error);
         }
     };
-    
+
+    const handleBackClick = () => {
+        navigate('/customer');
+    };
 
     return (
         <div>
             <h2>Customer Details</h2>
+            <button onClick={handleBackClick}>Back</button> {/* Back button */}
             {customerData.length === 0 ? (
                 <p>No customer data available.</p>
             ) : (
@@ -97,7 +103,7 @@ function CustomerDetails() {
                     </thead>
                     <tbody>
                         {customerData.map((customer) => (
-                            <tr key={customer.id}> {/* Use 'id' as the unique identifier */}
+                            <tr key={customer.id}>
                                 <td>{customer.name}</td>
                                 <td>{customer.phone_no}</td>
                                 <td>{customer.email_id}</td>

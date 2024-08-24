@@ -1,57 +1,57 @@
 import React, { useState } from 'react';
 
-function CustomerOnboard() {
-  const [customerName, setCustomerName] = useState('');
+function EmployeeOnboard() {
+  const [employeeName, setEmployeeName] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [emailId, setEmailId] = useState('');
-  const [chakkiCenterName, setChakkiCenterName] = useState('');
-  const [address, setAddress] = useState('');
+  const [designation, setDesignation] = useState('');
+  const [department, setDepartment] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const customerData = {
-      name: customerName,
+    const employeeData = {
+      name: employeeName,
       phone_no: phoneNo,
       email_id: emailId,
-      chakki_center_name: chakkiCenterName,
-      address: address,
+      designation: designation,
+      department: department,
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/customer', {
+      const response = await fetch('http://127.0.0.1:5000/employee', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(customerData),
+        body: JSON.stringify(employeeData),
       });
 
       if (response.ok) {
-        setSuccessMessage('Customer data submitted successfully!');
+        setSuccessMessage('Employee data submitted successfully!');
         setErrorMessage('');
       } else {
-        throw new Error('Failed to submit customer data');
+        throw new Error('Failed to submit employee data');
       }
     } catch (error) {
-      console.error('Error submitting customer data:', error);
-      setErrorMessage('Failed to submit customer data. Please try again.');
+      console.error('Error submitting employee data:', error);
+      setErrorMessage('Failed to submit employee data. Please try again.');
     }
   };
 
   return (
     <div>
-      <h2>Customer Onboard</h2>
+      <h2>Employee Onboard</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Customer Name:
+          Employee Name:
           <input
             type="text"
-            placeholder="Enter customer name"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
+            placeholder="Enter employee name"
+            value={employeeName}
+            onChange={(e) => setEmployeeName(e.target.value)}
             required
           />
         </label>
@@ -79,23 +79,23 @@ function CustomerOnboard() {
         </label>
         <br />
         <label>
-          Chakki Center Name:
+          Designation:
           <input
             type="text"
-            placeholder="Enter chakki center name"
-            value={chakkiCenterName}
-            onChange={(e) => setChakkiCenterName(e.target.value)}
+            placeholder="Enter designation"
+            value={designation}
+            onChange={(e) => setDesignation(e.target.value)}
             required
           />
         </label>
         <br />
         <label>
-          Address:
+          Department:
           <input
             type="text"
-            placeholder="Enter address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Enter department"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
             required
           />
         </label>
@@ -108,4 +108,4 @@ function CustomerOnboard() {
   );
 }
 
-export default CustomerOnboard;
+export default EmployeeOnboard;
