@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route ,useNavigate} from 'react-router-dom';
 import EmployeeOnboard from './EmployeeOnboard'; // Import the EmployeeOnboard component
 import EmployeeDetails from './EmployeeDetails'; // Import the EmployeeDetails component
 
 function Employee() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1>Employee Management</h1>
@@ -16,6 +18,8 @@ function Employee() {
             <Link to="details">Employee Details</Link>
           </li>
         </ul>
+        <button onClick={() => navigate('/welcome')}>Back to Welcome</button>
+
       </nav>
 
       <Routes>

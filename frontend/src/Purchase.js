@@ -1,6 +1,6 @@
 // frontend/src/components/Purchase.js
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes,useNavigate } from 'react-router-dom';
 import FRInput from './FRInput';
 import FRDisplay from './FRDisplay';
 import MSCInput from './MSCInput';
@@ -11,6 +11,8 @@ import FC2Input from './FC2Input';
 import FC2Display from './FC2Display';
 
 function Purchase() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h2>Purchase</h2>
@@ -23,6 +25,8 @@ function Purchase() {
         <li><Link to="fc1/display">FC1 Display</Link></li>
         <li><Link to="fc2/input">FC2 Input</Link></li>
         <li><Link to="fc2/display">FC2 Display</Link></li>
+        <button onClick={() => navigate('/welcome')}>Back to Main page</button>
+
       </ul>
 
       <Routes>

@@ -83,6 +83,8 @@ def read_from_excel(file_path, sheet_name):
         print(f"Failed to read data from Excel: {e}")
         return []
 
+
+
 def delete_purchase_from_excel(file_path, sheet_name, row_id):
     if not isinstance(file_path, str):
         print(f"Invalid file path in delete_purchase_from_excel: {file_path} (type: {type(file_path)})")

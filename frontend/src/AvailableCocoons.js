@@ -1,10 +1,24 @@
 import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import AvailableCocoonsList from './AvailableCocoonsList';
 
 function AvailableCocoons() {
+  const breeds = ['FR', 'MSC', 'FC1', 'FC2'];
+
   return (
     <div>
       <h2>Available Cocoons</h2>
-      <p>This page will show the details of available cocoons.</p>
+      <ul>
+        {breeds.map((breed) => (
+          <li key={breed}>
+            <Link to={breed}>{breed}</Link>
+          </li>
+        ))}
+      </ul>
+
+      <Routes>
+        <Route path=":breed" element={<AvailableCocoonsList />} />
+      </Routes>
     </div>
   );
 }

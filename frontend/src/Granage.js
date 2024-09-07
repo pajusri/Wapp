@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Granary() {
+function Granage() {
   return (
     <div>
       <h2>Granary</h2>
@@ -9,4 +9,4 @@ function Granary() {
   );
 }
 
-export default Granary;
+export default Granage;

@@ -53,15 +53,17 @@ function MSCInput() {
           required
         >
           <option value="">Select Market</option>
-          <option value="B1">B1</option>
-          <option value="B2">B2</option>
-          <option value="B3">B3</option>
-          <option value="B4">B4</option>
-          <option value="B5">B5</option>
-          <option value="B6">B6</option>
-          <option value="B7">B7</option>
-          <option value="B8">B8</option>
-          <option value="B9">B9</option>
+          <option value="Chaudunkupe">Chaudunkupe</option>
+            <option value="Huliur Durga">Huliur Durga</option>
+            <option value="Magdi">Magdi</option>
+            <option value="Kunigal">Kunigal</option>
+            <option value="VG Dodi">VG Dodi</option>
+            <option value="Kempanahalli">Kempanahalli</option>
+            <option value="Hebur">Hebur</option>
+            <option value="Solur">Solur</option>
+            <option value="Kudur">Kudur</option>
+            <option value="Block">Block</option>
+
         </select>
       </label>
       <label>

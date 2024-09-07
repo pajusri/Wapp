@@ -39,3 +39,13 @@ def delete_customer(id):
     file_path = '/Users/admin/APP1/data_new.xlsx'
     result = delete_from_excel(file_path, id)
     return jsonify({'success': result})
+
+# Route for getting a customer by ID
+@customer_bp.route('/customer/<int:id>', methods=['GET'])
+def get_customer(id):
+    file_path = '/Users/admin/APP1/data_new.xlsx'
+    customer = read_from_excel(file_path)
+    for entry in customer:
+        if entry['id'] == id:
+            return jsonify(entry)
+    return jsonify({'error': 'Customer not found'}), 404
