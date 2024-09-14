@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the centralized API base URL
 
 function FRDisplay() {
   const [purchaseData, setPurchaseData] = useState([]);
@@ -11,7 +12,7 @@ function FRDisplay() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/fr');
+      const response = await fetch(`${API_BASE_URL}/purchase/fr`); // Use API_BASE_URL
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
@@ -28,7 +29,9 @@ function FRDisplay() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?') && window.confirm('Are you really sure?')) {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/purchase/fr/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${API_BASE_URL}/purchase/fr/${id}`, { // Use API_BASE_URL
+          method: 'DELETE',
+        });
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

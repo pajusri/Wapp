@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig';
 
 function ColdStorageDisplay() {
   const [storageData, setStorageData] = useState([]);
@@ -17,19 +18,29 @@ function ColdStorageDisplay() {
 
   const fetchStorageData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/stock/cold-storage/display');
+      const response = await fetch(`${API_BASE_URL}/stock/cold-storage/display`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
       const data = await response.json();
+      console.log('Data:', data);
       setStorageData(data);
-
-      // Calculate total number of eggs
+  
       const total = data.reduce((sum, record) => sum + parseInt(record.no_of_eggs, 10), 0);
       setTotalEggs(total);
-
     } catch (error) {
       console.error('Error fetching storage data:', error);
     }
   };
-
+  
+  
   const handleEdit = (record) => {
     setEditingRecord(record.id);
     setEditedData(record);
@@ -45,7 +56,7 @@ function ColdStorageDisplay() {
 
   const handleEditSubmit = async (id) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/stock/cold-storage/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/stock/cold-storage/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +79,7 @@ function ColdStorageDisplay() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/stock/cold-storage/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/stock/cold-storage/${id}`, {
           method: 'DELETE',
         });
         if (!response.ok) {

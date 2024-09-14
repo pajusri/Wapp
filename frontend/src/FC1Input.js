@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig';  // Import the API base URL
 
 function FC1Input() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ function FC1Input() {
     const total_cost = formData.kgs_purchased * formData.price_per_kg; // Calculate total cost
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/fc1', {
+      const response = await fetch(`${API_BASE_URL}/purchase/fc1`, {  // Updated URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

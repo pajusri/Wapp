@@ -9,7 +9,7 @@ function Customer() {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div class ="wbody">
             <h1>Customer Management</h1>
             <nav>
                 <ul>

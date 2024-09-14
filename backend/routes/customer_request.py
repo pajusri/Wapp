@@ -14,9 +14,11 @@ def load_or_create_workbook():
             workbook = openpyxl.load_workbook(FILE_PATH)
         else:
             workbook = openpyxl.Workbook()
-            sheet = workbook.active
-            sheet.title = "Requests"
-            sheet.append(['Chakki Center', 'Eggs Requested', 'Delivery Date', 'Hatching Date', 'Delivered'])
+            requests_sheet = workbook.active
+            requests_sheet.title = "Requests"
+            requests_sheet.append(['Chakki Center', 'Eggs Requested', 'Delivery Date', 'Hatching Date', 'Sent to Billing'])
+            billing_sheet = workbook.create_sheet("Billing")
+            billing_sheet.append(['Chakki Center', 'Eggs Requested', 'Delivery Date', 'Hatching Date'])
             workbook.save(FILE_PATH)
         return workbook
     except Exception as e:
@@ -50,7 +52,7 @@ def customer_request():
         print(f"Error saving request: {str(e)}")  # Log the error
         return jsonify({"error": str(e)}), 500
 
-# Get active requests (entries still under "Requests" section)
+# Get active requests
 @customer_request_bp.route('/customer/requests', methods=['GET'])
 def get_active_requests():
     try:
@@ -59,7 +61,7 @@ def get_active_requests():
         active_requests = []
 
         for row in sheet.iter_rows(min_row=2, values_only=True):
-            if row[4] == 'No':  # Not delivered
+            if row[4] == 'No':  # Not sent to billing
                 active_requests.append({
                     'chakkiCenter': row[0],
                     'eggsRequested': row[1],
@@ -72,25 +74,57 @@ def get_active_requests():
         print(f"Error fetching active requests: {str(e)}")  # Log the error
         return jsonify({'error': str(e)}), 500
 
-# Mark as delivered (or send to billing)
-@customer_request_bp.route('/customer/request/deliver', methods=['POST'])
-def mark_as_delivered():
-    data = request.get_json()
+# Send request to billing
+@customer_request_bp.route('/customer/request/send-to-billing', methods=['POST'])
+def send_to_billing():
+    data = request.get_json()  # Make sure the request is sending JSON data
     chakki_center = data.get('chakkiCenter')
 
     try:
         workbook = load_or_create_workbook()
-        sheet = workbook['Requests']
+        requests_sheet = workbook['Requests']
+        billing_sheet = workbook['Billing']
 
-        for row in sheet.iter_rows(min_row=2):
-            if row[0].value == chakki_center and row[4].value == 'No':
-                row[4].value = 'Yes'  # Mark as delivered
-                break
+        # Find the entry in the Requests sheet and mark it as sent to billing
+        found = False
+        for row in requests_sheet.iter_rows(min_row=2):
+            if row[0].value == chakki_center and row[4].value == 'No':  # Only move entries that are not sent to billing yet
+                # Append the data to the Billing sheet
+                billing_sheet.append([row[0].value, row[1].value, row[2].value, row[3].value])
 
-        workbook.save(FILE_PATH)
-        return jsonify({"message": "Entry sent to billing"}), 200
+                # Mark the request as sent to billing in the Requests sheet
+                row[4].value = 'Yes'
+                found = True
+                print(f"Marked {chakki_center} as sent to billing and moved to the Billing sheet.")
+
+        if found:
+            workbook.save(FILE_PATH)
+            return jsonify({"message": f"{chakki_center} sent to billing"}), 200
+        else:
+            return jsonify({"error": f"Entry for {chakki_center} not found or already sent to billing"}), 404
     except Exception as e:
-        print(f"Error marking as delivered: {str(e)}")
+        print(f"Error marking {chakki_center} as sent to billing: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+# Get billing requests
+@customer_request_bp.route('/customer/billing', methods=['GET'])
+def get_billing_requests():
+    try:
+        workbook = load_or_create_workbook()
+        billing_sheet = workbook['Billing']
+        billing_requests = []
+
+        for row in billing_sheet.iter_rows(min_row=2, values_only=True):
+            billing_requests.append({
+                'chakkiCenter': row[0],
+                'eggsRequested': row[1],
+                'deliveryDate': row[2],
+                'hatchingDate': row[3]
+            })
+
+        return jsonify(billing_requests), 200
+    except Exception as e:
+        print(f"Error fetching billing requests: {str(e)}")  # Log the error
         return jsonify({'error': str(e)}), 500
 
 # Delete customer request

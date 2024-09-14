@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig';  // Import the API base URL
 
 function CustomerOnboard() {
   const [customerName, setCustomerName] = useState('');
@@ -21,7 +22,7 @@ function CustomerOnboard() {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/customer', {
+      const response = await fetch(`${API_BASE_URL}/customer`, {  // Updated URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

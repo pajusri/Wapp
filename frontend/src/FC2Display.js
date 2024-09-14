@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the API base URL
 
 function FC2Display() {
   const [purchaseData, setPurchaseData] = useState([]);
@@ -11,7 +12,7 @@ function FC2Display() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/fc2');
+      const response = await fetch(`${API_BASE_URL}/purchase/fc2`);  // Updated URL
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
@@ -28,7 +29,7 @@ function FC2Display() {
   const handleDelete = async (lot_no) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/purchase/fc2/${lot_no}`, {
+        const response = await fetch(`${API_BASE_URL}/purchase/fc2/${lot_no}`, {  // Updated URL
           method: 'DELETE',
         });
         if (!response.ok) {
@@ -63,14 +64,14 @@ function FC2Display() {
             onChange={(e) => setMarketFilter(e.target.value)}>
             <option value="">All Markets</option>
             <option value="D1">D1</option>
-          <option value="D2">D2</option>
-          <option value="D3">D3</option>
-          <option value="D4">D4</option>
-          <option value="D5">D5</option>
-          <option value="D6">D6</option>
-          <option value="D7">D7</option>
-          <option value="D8">D8</option>
-          <option value="D9">D9</option>
+            <option value="D2">D2</option>
+            <option value="D3">D3</option>
+            <option value="D4">D4</option>
+            <option value="D5">D5</option>
+            <option value="D6">D6</option>
+            <option value="D7">D7</option>
+            <option value="D8">D8</option>
+            <option value="D9">D9</option>
           </select>
         </label>
         <label>

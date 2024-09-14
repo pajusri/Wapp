@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the centralized API base URL
 
 function WasteCocoonsEntry() {
   const [breed, setBreed] = useState('');
@@ -12,7 +13,7 @@ function WasteCocoonsEntry() {
     const entryData = { breed, kgs };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/waste_cocoons/entry', {
+      const response = await fetch(`${API_BASE_URL}/waste_cocoons/entry`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

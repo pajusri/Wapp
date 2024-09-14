@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import API_BASE_URL from './apiConfig';
 
 function AvailableCocoonsList() {
   const { breed } = useParams();
@@ -7,7 +8,7 @@ function AvailableCocoonsList() {
 
   const fetchCocoonsData = useCallback(async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/acocoons/${breed}`);
+      const response = await fetch(`${API_BASE_URL}/${breed}`);
       if (response.ok) {
         const data = await response.json();
         setCocoonsData(data);

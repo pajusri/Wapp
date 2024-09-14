@@ -14,7 +14,7 @@ function Purchase() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div class="wbody">
       <h2>Purchase</h2>
       <ul>
         <li><Link to="fr/input">FR Input</Link></li>

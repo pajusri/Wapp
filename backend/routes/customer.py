@@ -16,7 +16,12 @@ def create_customer():
 def customer_details():
     file_path = '/Users/admin/APP1/data_new.xlsx'
     data = read_from_excel(file_path)
-    return jsonify(data)
+    
+    # Log what is being read from the Excel file
+    print(f"Data read from Excel: {data}")
+    
+    return jsonify(data), 200
+
 
 # Route for updating customer details
 @customer_bp.route('/customer/<int:id>', methods=['PUT'])

@@ -5,6 +5,7 @@ def create_app():
     app = Flask(__name__)
     CORS(app)  # Allow cross-origin requests
 
+
     # Import blueprints inside the function to avoid circular imports
     from routes.auth import auth_bp
     from routes.customer import customer_bp

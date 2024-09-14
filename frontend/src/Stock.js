@@ -10,7 +10,7 @@ function Stock() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div class="wbody">
       <h1>Stock Management</h1>
       <nav>
         <ul>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the centralized API base URL
 
 function MSCInput() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ function MSCInput() {
     const total_cost = formData.kgs_purchased * formData.price_per_kg;
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/msc', {
+      const response = await fetch(`${API_BASE_URL}/purchase/msc`, {  // Use API_BASE_URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,16 +55,15 @@ function MSCInput() {
         >
           <option value="">Select Market</option>
           <option value="Chaudunkupe">Chaudunkupe</option>
-            <option value="Huliur Durga">Huliur Durga</option>
-            <option value="Magdi">Magdi</option>
-            <option value="Kunigal">Kunigal</option>
-            <option value="VG Dodi">VG Dodi</option>
-            <option value="Kempanahalli">Kempanahalli</option>
-            <option value="Hebur">Hebur</option>
-            <option value="Solur">Solur</option>
-            <option value="Kudur">Kudur</option>
-            <option value="Block">Block</option>
-
+          <option value="Huliur Durga">Huliur Durga</option>
+          <option value="Magdi">Magdi</option>
+          <option value="Kunigal">Kunigal</option>
+          <option value="VG Dodi">VG Dodi</option>
+          <option value="Kempanahalli">Kempanahalli</option>
+          <option value="Hebur">Hebur</option>
+          <option value="Solur">Solur</option>
+          <option value="Kudur">Kudur</option>
+          <option value="Block">Block</option>
         </select>
       </label>
       <label>

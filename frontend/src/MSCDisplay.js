@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the centralized API base URL
 
 function MSCDisplay() {
   const [purchaseData, setPurchaseData] = useState([]);
@@ -11,7 +12,7 @@ function MSCDisplay() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/msc');
+      const response = await fetch(`${API_BASE_URL}/purchase/msc`); // Use API_BASE_URL
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
@@ -28,7 +29,7 @@ function MSCDisplay() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?') && window.confirm('Are you really sure?')) {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/purchase/msc/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${API_BASE_URL}/purchase/msc/${id}`, { method: 'DELETE' }); // Use API_BASE_URL
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import API_BASE_URL from './apiConfig';  // Import the base URL
 
 function CustomerDetailView() {
     const { id } = useParams();
@@ -10,7 +11,7 @@ function CustomerDetailView() {
 
     const fetchCustomerDetails = useCallback(async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/customer/${id}`);
+            const response = await fetch(`${API_BASE_URL}/customer/${id}`);  // Updated URL
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -36,7 +37,7 @@ function CustomerDetailView() {
 
     const handleEditSubmit = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/customer/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/customer/${id}`, {  // Updated URL
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ function CustomerDetailView() {
     const handleDelete = async () => {
         if (window.confirm('Are you sure you want to delete this customer?')) {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/customer/${id}`, {
+                const response = await fetch(`${API_BASE_URL}/customer/${id}`, {  // Updated URL
                     method: 'DELETE',
                 });
                 if (!response.ok) {
@@ -78,7 +79,7 @@ function CustomerDetailView() {
     };
 
     return (
-        <div>
+        <div className="wbody"> {/* Changed class to className */}
             <button onClick={handleBack}>Back</button>
             {customer ? (
                 <>

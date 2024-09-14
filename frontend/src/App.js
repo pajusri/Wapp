@@ -6,6 +6,7 @@ import Employee from './Employee';
 import Bill from './Bill';
 import ProductionBook from './ProductionBook';
 import Purchase from './Purchase';
+import API_BASE_URL from './apiConfig';
 
 // Login Component
 function Login({ setRole }) {
@@ -26,7 +27,7 @@ function Login({ setRole }) {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', {
+      const response = await fetch(`${API_BASE_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,8 +54,9 @@ function Login({ setRole }) {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="wbody">
+      <h1>Welcome</h1>
+      <p className="user">Please enter your username and password</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -80,8 +82,8 @@ function Login({ setRole }) {
 // Welcome Component
 function Welcome({ role, onLogout }) {
   return (
-    <div>
-      <h1>Welcome to the application!</h1>
+    <div className="wbody">
+      <h1>Welcome to the application, {role}!</h1>
       <ul>
         {/* Owner: Show all pages */}
         {role === 'owner' && (

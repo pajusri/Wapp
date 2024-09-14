@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig';  // Import the API base URL
 
 function EmployeeDetails() {
   const [employeeData, setEmployeeData] = useState([]);
@@ -15,7 +16,7 @@ function EmployeeDetails() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://127.0.0.1:5000/employee-details');
+      const response = await fetch(`${API_BASE_URL}/employee-details`);  // Updated URL
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -36,7 +37,7 @@ function EmployeeDetails() {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/employee/${parseInt(id)}`, {
+      const response = await fetch(`${API_BASE_URL}/employee/${parseInt(id)}`, {  // Updated URL
         method: 'DELETE',
       });
 
@@ -70,7 +71,7 @@ function EmployeeDetails() {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/employee/${parseInt(editingEmployee.id)}`, {
+      const response = await fetch(`${API_BASE_URL}/employee/${parseInt(editingEmployee.id)}`, {  // Updated URL
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

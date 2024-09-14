@@ -17,10 +17,246 @@ input {
   margin: 5px;
   padding: 8px;
   width: 200px;
+  color: black;
 }
 
 button {
   margin: 10px;
   padding: 10px;
   cursor: pointer;
+  color: rgb(2, 17, 12);
+}
+
+.user {
+  text-align: center !important;
+}
+
+.body {
+  background-color: rgb(178, 58, 14);
+}
+
+/* Styling for the class 'wbody' */
+.wbody {
+  background-color: #026f80;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Styling for the unordered list */
+.wbody ul {
+  list-style-type: none; 
+  padding: 0;
+}
+
+/* Styling for list items */
+.wbody li {
+  margin: 10px 0;
+}
+
+/* Styling for the links */
+.wbody li a {
+  text-decoration: none; /* Remove underline from links */
+  color: #060607; /* Set link color */
+  font-weight: bold; /* Make links bold */
+  padding: 10px 15px;
+  display: inline-block; /* Make links block-level to apply padding */
+  border: 2px solid #0a0c0e; /* Add border around links */
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effects */
+  background-color: orange;
+}
+
+/* Hover effect for links */
+.wbody li a:hover {
+  background-color: #041629;
+  color: white;
+}
+
+/* Button design inside .wbody */
+.wbody button {
+  background-color: #007bff; /* Primary button color */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Make the text bold */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change the cursor to a pointer */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+/* Button hover state */
+.wbody button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Button focus state */
+.wbody button:focus {
+  outline: none; /* Remove the focus outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a focus shadow */
+}
+
+/* Button disabled state */
+.wbody button:disabled {
+  background-color: #cccccc; /* Disabled background */
+  color: #666666; /* Disabled text color */
+  cursor: not-allowed; /* Show not-allowed cursor */
+  opacity: 0.7; /* Reduce opacity for a disabled look */
+}
+
+/* Primary button */
+.wbody .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Secondary button */
+.wbody .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Danger button */
+.wbody .btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Hover effects for different button types */
+.wbody .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.wbody .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.wbody .btn-danger:hover {
+  background-color: #c82333;
+}
+/* Watermark styling for the footer text */
+.wbody::after {
+  content: "Built by Futurisync Systems Pvt Ltd Bengaluru | Version 1. 0"; /* The text to display */
+  display: block;
+  text-align: center; /* Center the text */
+  font-size: 12px; /* Small font size */
+  color: #ccc; /* Light gray color */
+  margin-top: 20px; /* Space between the content and footer */
+  padding: 10px;
+  position: fixed; /* Stick to the bottom of the viewport */
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Span the entire width */
+  background-color: #026f80; /* Same background as .wbody for consistency */
+}
+/* Placeholder styling inside .wbody */
+.wbody input::placeholder {
+  background-color:wheat;
+  color: #df1616; 
+  font-size: 16px; /* Placeholder font size */
+  font-style: italic; /* Italic style to differentiate the placeholder */
+  opacity: 1; /* Make sure it's fully visible */
+}
+
+/* Styling for larger screens */
+@media (min-width: 768px) {
+  .wbody input::placeholder {
+    font-size: 18px; /* Larger placeholder text for bigger screens */
+  }
+}
+
+/* Hover and focus states for input fields */
+.wbody input:hover::placeholder,
+.wbody input:focus::placeholder {
+  color: #555; /* Change placeholder color on hover/focus */
+  opacity: 0.8; /* Make it slightly transparent when focused */
+}
+/* Styling for the Customer Details table */
+.wbody table {
+  width: 100%;
+  border-collapse: collapse; /* Remove gaps between table cells */
+  margin-top: 20px;
+}
+
+/* Styling for table headers */
+.wbody table th {
+  background-color: #026f80;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Styling for table rows */
+.wbody table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Add bottom border for better row separation */
+}
+
+/* Styling for the links inside the table */
+.wbody table td a {
+  color: #007bff; /* Set link color */
+  text-decoration: none; /* Remove underline from the links */
+  font-weight: bold; /* Make the link text bold */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for the links */
+.wbody table td a:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline; /* Underline the link on hover */
+}
+
+/* Styling for the Billing Tasks list */
+.wbody ul {
+  list-style-type: none; /* Remove default list bullets */
+  padding: 0;
+  margin: 20px 0;
+}
+
+/* Styling for each list item */
+.wbody ul li {
+  background-color:wheat; /* Light background for each task */
+  border: 1px solid #ddd; /* Border to separate tasks */
+  padding: 15px;
+  margin-bottom: 10px; /* Space between each task */
+  border-radius: 8px; /* Rounded corners */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styling for the text inside list items */
+.wbody ul li span {
+  font-weight: bold;
+  color: #333; /* Darker text for readability */
+}
+
+/* Styling for the buttons inside the list items */
+.wbody ul li button {
+  background-color: #007bff; /* Primary button color */
+  color: white; /* Button text color */
+  border: none; /* Remove default borders */
+  padding: 8px 12px; /* Padding inside the button */
+  margin-left: 10px; /* Space between the buttons */
+  font-size: 14px; /* Font size */
+  border-radius: 5px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor to indicate clickability */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for the buttons */
+.wbody ul li button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Styling for the "Delete" button */
+.wbody ul li .btn-delete {
+  background-color: #dc3545; /* Red for delete button */
+}
+
+.wbody ul li .btn-delete:hover {
+  background-color: #c82333; /* Darker red on hover */
 }

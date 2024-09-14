@@ -7,7 +7,7 @@ function Employee() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div class="wbody">
       <h1>Employee Management</h1>
       <nav>
         <ul>

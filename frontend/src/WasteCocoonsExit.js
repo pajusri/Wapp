@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig'; // Import centralized API base URL
 
 function WasteCocoonsExit() {
   const [breed, setBreed] = useState('');
@@ -13,7 +14,7 @@ function WasteCocoonsExit() {
     const exitData = { breed, kgs };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/waste_cocoons/exit', {
+      const response = await fetch(`${API_BASE_URL}/waste_cocoons/exit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig';  // Import the API base URL
 
 function FC1Display() {
   const [purchaseData, setPurchaseData] = useState([]);
@@ -11,7 +12,7 @@ function FC1Display() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/fc1');
+      const response = await fetch(`${API_BASE_URL}/purchase/fc1`);  // Updated URL
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
@@ -28,7 +29,7 @@ function FC1Display() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?') && window.confirm('Are you really sure?')) {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/purchase/fc1/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${API_BASE_URL}/purchase/fc1/${id}`, { method: 'DELETE' });  // Updated URL
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

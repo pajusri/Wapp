@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the centralized API base URL
 
 function WasteCocoonsAvailable() {
   const [availableKgs, setAvailableKgs] = useState({});
@@ -6,7 +7,7 @@ function WasteCocoonsAvailable() {
   useEffect(() => {
     const fetchAvailableKgs = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/waste_cocoons/available');
+        const response = await fetch(`${API_BASE_URL}/waste_cocoons/available`);
         const data = await response.json();
         setAvailableKgs(data);  // Set the entire object containing breed data
       } catch (error) {

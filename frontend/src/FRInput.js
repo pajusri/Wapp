@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './apiConfig'; // Import the centralized API base URL
 
 function FRInput() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ function FRInput() {
     const total_cost = formData.kgs_purchased * formData.price_per_kg; // Calculate total cost
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/purchase/fr', {
+      const response = await fetch(`${API_BASE_URL}/purchase/fr`, { // Use API_BASE_URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +61,6 @@ function FRInput() {
           <option value="K.R Pete">K.R Pete</option>
           <option value="Bengaluru">Bengaluru</option>
           <option value="Block">Block</option>
-
         </select>
       </label>
       <label>
